@@ -1,0 +1,295 @@
+
+/* =================================
+   IPL TICKET BOOKING WEBSITE
+   ACTIVITY 2 - CSS STYLING
+================================= */
+
+/* 1. CSS VARIABLES */
+:root {
+    --primary: #101b3f;
+    --accent: #ffcc33;
+    --background: #f4f6fb;
+    --text: #222222;
+    --white: #ffffff;
+    --red: #e63946;
+}
+
+/* 2. GENERAL STYLING */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* 3. NAVIGATION BAR */
+header {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 18px 40px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    color: var(--accent);
+    font-size: 28px;
+}
+
+nav a {
+    color: var(--white);
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: var(--accent);
+}
+
+/* Space for fixed navigation */
+body {
+    padding-top: 75px;
+}
+
+/* 4. HERO / BANNER SECTION */
+body > section:first-of-type {
+    background: linear-gradient(
+        120deg,
+        var(--primary),
+        var(--red)
+    );
+
+    color: var(--white);
+    text-align: center;
+    padding: 100px 20px;
+}
+
+body > section:first-of-type h1 {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+body > section:first-of-type p {
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+/* BUTTONS */
+button {
+    background-color: var(--accent);
+    color: var(--primary);
+    border: none;
+    padding: 12px 25px;
+    margin: 8px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: var(--white);
+    transform: scale(1.05);
+}
+
+/* 5. GENERAL SECTIONS */
+section {
+    padding: 45px 7%;
+    margin: 20px auto;
+    scroll-margin-top: 85px;
+}
+
+section h2 {
+    color: var(--primary);
+    font-size: 28px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 10px;
+}
+
+section h3 {
+    color: var(--red);
+    margin: 18px 0 10px;
+}
+
+/* LISTS */
+ul {
+    padding-left: 30px;
+}
+
+/* 6. MATCH SCHEDULE TABLE */
+#matches {
+    overflow-x: auto;
+}
+
+#teamFilter {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: var(--white);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+}
+
+th {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 14px;
+}
+
+td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #eef1f8;
+}
+
+tr:hover {
+    background-color: #fff1c2;
+}
+
+td a {
+    background-color: var(--red);
+    color: var(--white);
+    padding: 7px 14px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+/* 7. BOOKING FORM AND SUMMARY */
+#booking {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 25px;
+    align-items: start;
+}
+
+#booking h2 {
+    grid-column: 1 / -1;
+}
+
+#booking form,
+#booking aside {
+    background-color: var(--white);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+}
+
+#booking form {
+    display: flex;
+    flex-direction: column;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 11px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input:focus,
+select:focus {
+    outline: 2px solid var(--accent);
+}
+
+#booking aside {
+    border-top: 5px solid var(--accent);
+}
+
+/* 8. MY BOOKINGS SECTION */
+#mybookings {
+    overflow-x: auto;
+}
+
+/* 9. GUIDELINES CARDS */
+#guidelines article {
+    display: inline-block;
+    vertical-align: top;
+    width: 31%;
+    margin: 1%;
+    padding: 22px;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+#guidelines article:hover {
+    transform: translateY(-5px);
+}
+
+#guidelines article h3 {
+    color: var(--red);
+}
+
+/* 10. FOOTER */
+footer {
+    background-color: var(--primary);
+    color: var(--white);
+    text-align: center;
+    padding: 25px;
+    margin-top: 30px;
+}
+
+/* 11. RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+
+    header {
+        flex-direction: column;
+        padding: 15px;
+        gap: 10px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 5px;
+    }
+
+    body {
+        padding-top: 110px;
+    }
+
+    body > section:first-of-type h1 {
+        font-size: 30px;
+    }
+
+    #booking {
+        grid-template-columns: 1fr;
+    }
+
+    #guidelines article {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    table {
+        min-width: 750px;
+    }
+}
