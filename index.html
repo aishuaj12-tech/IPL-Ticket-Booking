@@ -1,12 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>IPL 2026 Ticket Booking</title>
+
     <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
 </head>
 
 <body>
@@ -16,29 +18,31 @@
         <h1>IPL 2026</h1>
 
         <nav>
-            <a href="#matches">Matches</a> |
-            <a href="booking.html">Book Ticket</a> |
-            <a href="#mybookings">My Bookings</a> |
+            <a href="#matches">Matches</a>
+            <a href="booking.html">Book Ticket</a>
+            <a href="#mybookings">My Bookings</a>
             <a href="#guidelines">Guidelines</a>
         </nav>
     </header>
 
     <!-- Hero Section -->
-    <section>
+    <section class="hero">
         <h1>Experience The Stadium Energy Live!</h1>
+
         <p>Watch your favourite IPL teams battle for glory.</p>
 
         <a href="#matches">
-            <button>View Schedule</button>
+            <button type="button">View Schedule</button>
         </a>
 
         <a href="booking.html">
-            <button>Book Ticket</button>
+            <button type="button">Book Ticket</button>
         </a>
     </section>
 
     <!-- About IPL -->
     <section id="about">
+
         <h2>About IPL 2026</h2>
 
         <p>
@@ -70,10 +74,12 @@
             <li>Eden Gardens, Kolkata</li>
             <li>Narendra Modi Stadium, Ahmedabad</li>
         </ul>
+
     </section>
 
     <!-- Match Schedule -->
     <section id="matches">
+
         <h2>Match Schedule</h2>
 
         <label for="teamFilter">Filter by Team:</label>
@@ -86,13 +92,12 @@
             <option value="KKR">KKR</option>
         </select>
 
-        <table border="1" cellpadding="10">
-
+        <table>
             <thead>
                 <tr>
                     <th>Match Number</th>
                     <th>Teams</th>
-                    <th>Date & Time</th>
+                    <th>Date &amp; Time</th>
                     <th>Venue</th>
                     <th>General</th>
                     <th>Premium</th>
@@ -111,7 +116,11 @@
                     <td>₹1000</td>
                     <td>₹2500</td>
                     <td>₹5000</td>
-                    <td><a href="booking.html">Book</a></td>
+                    <td>
+                        <a href="#booking"
+                           class="book-btn"
+                           data-match="RCB vs MI">Book</a>
+                    </td>
                 </tr>
 
                 <tr>
@@ -122,7 +131,11 @@
                     <td>₹1200</td>
                     <td>₹3000</td>
                     <td>₹5500</td>
-                    <td><a href="booking.html">Book</a></td>
+                    <td>
+                        <a href="#booking"
+                           class="book-btn"
+                           data-match="CSK vs KKR">Book</a>
+                    </td>
                 </tr>
 
                 <tr>
@@ -133,7 +146,11 @@
                     <td>₹1500</td>
                     <td>₹3500</td>
                     <td>₹6000</td>
-                    <td><a href="booking.html">Book</a></td>
+                    <td>
+                        <a href="#booking"
+                           class="book-btn"
+                           data-match="MI vs CSK">Book</a>
+                    </td>
                 </tr>
 
                 <tr>
@@ -144,19 +161,139 @@
                     <td>₹1000</td>
                     <td>₹2800</td>
                     <td>₹5000</td>
-                    <td><a href="booking.html">Book</a></td>
+                    <td>
+                        <a href="#booking"
+                           class="book-btn"
+                           data-match="KKR vs RCB">Book</a>
+                    </td>
                 </tr>
 
             </tbody>
         </table>
+
+    </section>
+
+    <!-- Actual Booking Form -->
+    <section id="booking">
+
+        <div class="booking-container">
+
+            <h2>IPL Ticket Booking</h2>
+
+            <form id="bookingForm">
+
+                <div class="form-group">
+                    <label for="name">Full Name:</label>
+                    <input type="text"
+                           id="name"
+                           name="name"
+                           placeholder="Enter your name"
+                           minlength="3"
+                           maxlength="30"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email"
+                           id="email"
+                           name="email"
+                           placeholder="Enter your email"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel"
+                           id="phone"
+                           name="phone"
+                           placeholder="Enter 10-digit number"
+                           pattern="[0-9]{10}"
+                           minlength="10"
+                           maxlength="10"
+                           title="Please enter exactly 10 digits"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label for="match">Select Match:</label>
+                    <select id="match" name="match" required>
+                        <option value="">-- Select a Match --</option>
+                        <option value="RCB vs MI">RCB vs MI</option>
+                        <option value="CSK vs KKR">CSK vs KKR</option>
+                        <option value="MI vs CSK">MI vs CSK</option>
+                        <option value="KKR vs RCB">KKR vs RCB</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="stand">Stand Category:</label>
+                    <select id="stand" name="stand" required>
+                        <option value="">-- Select Stand --</option>
+                        <option value="General">General</option>
+                        <option value="Premium">Premium</option>
+                        <option value="VIP">VIP</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="tickets">Number of Tickets:</label>
+                    <input type="number"
+                           id="tickets"
+                           name="tickets"
+                           min="1"
+                           max="10"
+                           placeholder="Enter number of tickets"
+                           required>
+                </div>
+
+                <div class="preference">
+
+                    <label>Additional Preference:</label>
+
+                    <label class="radio-label" for="regular">
+                        <input type="radio"
+                               id="regular"
+                               name="preference"
+                               value="Regular"
+                               checked>
+                        Regular Seating
+                    </label>
+
+                    <label class="radio-label" for="family">
+                        <input type="radio"
+                               id="family"
+                               name="preference"
+                               value="Family">
+                        Family Seating
+                    </label>
+
+                </div>
+
+                <div class="form-buttons">
+
+                    <button type="submit" class="submit">
+                        Confirm Booking
+                    </button>
+
+                    <button type="reset" class="reset">
+                        Reset
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
     </section>
 
     <!-- My Bookings -->
     <section id="mybookings">
+
         <h2>My Ticket Bookings</h2>
 
-        <table border="1" cellpadding="10">
-
+        <table>
             <thead>
                 <tr>
                     <th>Booking ID</th>
@@ -170,14 +307,15 @@
             <tbody>
                 <!-- Booking records will be added later -->
             </tbody>
-
         </table>
 
         <p>No bookings available yet.</p>
+
     </section>
 
     <!-- Guidelines -->
     <section id="guidelines">
+
         <h2>Ticket Booking Guidelines</h2>
 
         <article>
@@ -203,12 +341,16 @@
                 items are not allowed.
             </p>
         </article>
+
     </section>
 
     <!-- Footer -->
     <footer>
+
         <p>&copy; 2026 IPL Ticket Booking. All Rights Reserved.</p>
+
         <p>Enjoy the excitement of cricket!</p>
+
     </footer>
 
 </body>
