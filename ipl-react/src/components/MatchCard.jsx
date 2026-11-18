@@ -2,7 +2,6 @@
 import { useState } from "react";
 
 function MatchCard(props) {
-
   const [tickets, setTickets] = useState(0);
 
   return (
@@ -10,11 +9,25 @@ function MatchCard(props) {
 
       <h2>{props.team1} vs {props.team2}</h2>
 
-      <p>Date: {props.date}</p>
+      <p>
+        <strong>Date:</strong> {props.date}
+      </p>
 
-      <p>Venue: {props.venue}</p>
+      <p>
+        <strong>Venue:</strong> {props.venue}
+      </p>
 
-      <p>Ticket Price: ₹{props.price}</p>
+      <p>
+        <strong>General:</strong> ₹{props.general}
+      </p>
+
+      <p>
+        <strong>Premium:</strong> ₹{props.premium}
+      </p>
+
+      <p>
+        <strong>VIP:</strong> ₹{props.vip}
+      </p>
 
       <p>Tickets Selected: {tickets}</p>
 

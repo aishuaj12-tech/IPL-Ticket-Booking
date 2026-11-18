@@ -4,33 +4,46 @@ import Hero from "./components/Hero";
 import MatchCard from "./components/MatchCard";
 
 function App() {
-
   const matches = [
     {
       id: 1,
       team1: "RCB",
-      team2: "CSK",
-      date: "25 November 2026",
+      team2: "MI",
+      date: "10 April 2026, 7:30 PM",
       venue: "Bengaluru",
-      price: 1500
+      general: 1000,
+      premium: 2500,
+      vip: 5000
     },
-
     {
       id: 2,
-      team1: "MI",
+      team1: "CSK",
       team2: "KKR",
-      date: "26 November 2026",
-      venue: "Mumbai",
-      price: 1200
+      date: "12 April 2026, 7:30 PM",
+      venue: "Chennai",
+      general: 1200,
+      premium: 3000,
+      vip: 5500
     },
-
     {
       id: 3,
-      team1: "SRH",
-      team2: "RR",
-      date: "27 November 2026",
-      venue: "Hyderabad",
-      price: 1000
+      team1: "MI",
+      team2: "CSK",
+      date: "15 April 2026, 7:30 PM",
+      venue: "Mumbai",
+      general: 1500,
+      premium: 3500,
+      vip: 6000
+    },
+    {
+      id: 4,
+      team1: "KKR",
+      team2: "RCB",
+      date: "18 April 2026, 7:30 PM",
+      venue: "Kolkata",
+      general: 1000,
+      premium: 2800,
+      vip: 5000
     }
   ];
 
@@ -42,7 +55,7 @@ function App() {
 
       <h1>Upcoming Matches</h1>
 
-      <div>
+      <div className="matches-container">
         {matches.map((match) => (
           <MatchCard
             key={match.id}
@@ -50,11 +63,12 @@ function App() {
             team2={match.team2}
             date={match.date}
             venue={match.venue}
-            price={match.price}
+            general={match.general}
+            premium={match.premium}
+            vip={match.vip}
           />
         ))}
       </div>
-
     </div>
   );
 }
