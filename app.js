@@ -1,11 +1,10 @@
 /* =================================
    IPL TICKET BOOKING WEBSITE
-   ACTIVITY 5, 6 AND 7 - JAVASCRIPT
+   ACTIVITY 5, 6, 7 AND 8
 ================================= */
 
-/* 1. REUSABLE TOAST FUNCTION */
+/* 1. TOAST NOTIFICATION */
 function showToast(message) {
-
     let toast = document.getElementById("toast");
 
     if (!toast) {
@@ -16,15 +15,17 @@ function showToast(message) {
 
     toast.textContent = message;
 
-    toast.style.position = "fixed";
-    toast.style.bottom = "30px";
-    toast.style.right = "30px";
-    toast.style.backgroundColor = "#003366";
-    toast.style.color = "white";
-    toast.style.padding = "15px 25px";
-    toast.style.borderRadius = "8px";
-    toast.style.zIndex = "1000";
-    toast.style.display = "block";
+    Object.assign(toast.style, {
+        position: "fixed",
+        bottom: "30px",
+        right: "30px",
+        backgroundColor: "#003366",
+        color: "white",
+        padding: "15px 25px",
+        borderRadius: "8px",
+        zIndex: "2000",
+        display: "block"
+    });
 
     clearTimeout(window.toastTimer);
 
@@ -37,7 +38,7 @@ function showToast(message) {
 /* 2. DOM CONTENT LOADED */
 document.addEventListener("DOMContentLoaded", function () {
 
-    /* 3. GET FORM ELEMENTS */
+    /* 3. BOOKING FORM ELEMENTS */
     const bookingForm = document.getElementById("bookingForm");
 
     const matchSelect = document.getElementById("match");
@@ -49,36 +50,29 @@ document.addEventListener("DOMContentLoaded", function () {
     const summaryTickets = document.getElementById("summaryTickets");
     const summaryTotal = document.getElementById("summaryTotal");
 
-
     /* 4. TICKET PRICES */
     const ticketPrices = {
-
         "RCB vs MI": {
             "General": 1000,
             "Premium": 2500,
             "VIP": 5000
         },
-
         "CSK vs KKR": {
             "General": 1200,
             "Premium": 3000,
             "VIP": 5500
         },
-
         "MI vs CSK": {
             "General": 1500,
             "Premium": 3500,
             "VIP": 6000
         },
-
         "KKR vs RCB": {
             "General": 1000,
             "Premium": 2800,
             "VIP": 5000
         }
-
     };
-
 
     /* 5. UPDATE BOOKING SUMMARY */
     function updateSummary(showNotification = false) {
@@ -88,25 +82,23 @@ document.addEventListener("DOMContentLoaded", function () {
         const quantity = Number(ticketsInput.value);
 
         summaryMatch.textContent = match || "Not selected";
-
         summaryStand.textContent = stand || "Not selected";
 
         summaryTickets.textContent =
-            ticketsInput.value ? ticketsInput.value : "Not selected";
+            ticketsInput.value || "Not selected";
 
         let total = 0;
 
         if (
             match &&
             stand &&
+            ticketsInput.value !== "" &&
             Number.isSafeInteger(quantity) &&
             quantity >= 1 &&
             ticketPrices[match] &&
             ticketPrices[match][stand]
         ) {
-
             total = ticketPrices[match][stand] * quantity;
-
         }
 
         summaryTotal.textContent =
@@ -115,12 +107,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (showNotification) {
             showToast("Booking Summary Updated!");
         }
-
     }
 
-
     /* 6. LIVE SUMMARY UPDATES */
-
     matchSelect.addEventListener("change", function () {
         updateSummary(true);
     });
@@ -138,43 +127,31 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    /* 7. BOOK BUTTONS AND SMOOTH SCROLLING */
-
+    /* 7. BOOK BUTTONS */
     const bookButtons = document.querySelectorAll(".book-btn");
 
     bookButtons.forEach(function (button) {
 
-        button.addEventListener("click", function (event) {
-
-            event.preventDefault();
+        button.addEventListener("click", function () {
 
             const matchName = button.getAttribute("data-match");
 
-            const bookingSection = document.getElementById("booking");
+            matchSelect.value = matchName;
+            updateSummary();
 
-            if (matchSelect && bookingSection) {
+            document.getElementById("booking").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
 
-                matchSelect.value = matchName;
-
-                updateSummary();
-
-                bookingSection.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
-
-                showToast("Selected match: " + matchName);
-
-            }
-
+            showToast("Selected match: " + matchName);
         });
-
     });
 
 
-    /* 8. TEAM FILTER */
-
+    /* 8. TEAM FILTER FOR MATCH CARDS */
     const teamFilter = document.getElementById("teamFilter");
+    const matchCards = document.querySelectorAll(".match-card");
 
     if (teamFilter) {
 
@@ -182,34 +159,66 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const selectedTeam = teamFilter.value;
 
-            const rows = document.querySelectorAll("#matches tbody tr");
+            matchCards.forEach(function (card) {
 
-            rows.forEach(function (row) {
-
-                const teams = row.cells[1].textContent;
+                const teams = card.querySelector("h2").textContent;
 
                 if (
                     selectedTeam === "all" ||
                     teams.includes(selectedTeam)
                 ) {
-
-                    row.style.display = "";
-
+                    card.style.display = "";
                 } else {
-
-                    row.style.display = "none";
-
+                    card.style.display = "none";
                 }
-
             });
-
         });
-
     }
 
 
-    /* 9. BOOKING FORM SUBMISSION */
+    /* 9. GRID AND LIST VIEW */
+    const matchContainer = document.getElementById("matchContainer");
 
+    const gridView = document.getElementById("gridView");
+    const listView = document.getElementById("listView");
+
+    gridView.addEventListener("click", function () {
+        matchContainer.classList.remove("list-view");
+        showToast("Grid View Selected");
+    });
+
+    listView.addEventListener("click", function () {
+        matchContainer.classList.add("list-view");
+        showToast("List View Selected");
+    });
+
+
+    /* 10. HAMBURGER MENU */
+    const menuToggle = document.getElementById("menuToggle");
+    const navMenu = document.getElementById("navMenu");
+
+    menuToggle.addEventListener("click", function () {
+
+        const isOpen = navMenu.classList.toggle("active");
+
+        menuToggle.setAttribute("aria-expanded", isOpen);
+
+        menuToggle.textContent = isOpen ? "✕" : "☰";
+    });
+
+    /* Close menu after selecting a navigation link */
+    navMenu.querySelectorAll("a").forEach(function (link) {
+
+        link.addEventListener("click", function () {
+
+            navMenu.classList.remove("active");
+            menuToggle.setAttribute("aria-expanded", "false");
+            menuToggle.textContent = "☰";
+        });
+    });
+
+
+    /* 11. BOOKING FORM SUBMISSION */
     if (bookingForm) {
 
         bookingForm.addEventListener("submit", function (event) {
@@ -218,29 +227,56 @@ document.addEventListener("DOMContentLoaded", function () {
 
             updateSummary();
 
-            showToast("Your booking request has been submitted successfully!");
+            const match = matchSelect.value;
+            const stand = standSelect.value;
+            const quantity = Number(ticketsInput.value);
+            const total = ticketPrices[match][stand] * quantity;
+
+            const bookingRecords =
+                document.getElementById("bookingRecords");
+
+            const noBookings =
+                document.getElementById("noBookings");
+
+            const newRow = document.createElement("tr");
+
+            const bookingID =
+                "IPL" + Date.now().toString().slice(-6);
+
+            const values = [
+                bookingID,
+                match,
+                stand,
+                quantity,
+                "₹" + total.toLocaleString("en-IN")
+            ];
+
+            values.forEach(function (value) {
+                const cell = document.createElement("td");
+                cell.textContent = value;
+                newRow.appendChild(cell);
+            });
+
+            bookingRecords.appendChild(newRow);
+
+            noBookings.style.display = "none";
+
+            showToast("Booking Confirmed Successfully!");
 
             bookingForm.reset();
-
             updateSummary();
-
         });
 
-
-        /* 10. RESET FORM */
-
+        /* 12. RESET FORM */
         bookingForm.addEventListener("reset", function () {
 
             setTimeout(function () {
                 updateSummary();
             }, 0);
-
         });
-
     }
 
-
-    /* 11. INITIAL SUMMARY */
+    /* 13. INITIAL SUMMARY */
     updateSummary();
 
 });
