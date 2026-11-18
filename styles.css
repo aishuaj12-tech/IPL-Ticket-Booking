@@ -183,7 +183,7 @@ td a:hover {
 
 .booking-container {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
     background-color: var(--white);
     padding: 25px 35px;
@@ -197,10 +197,19 @@ td a:hover {
     margin-bottom: 20px;
 }
 
+/* FORM AND SUMMARY SIDE BY SIDE */
+.booking-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(260px, 1fr);
+    gap: 25px;
+    align-items: start;
+}
+
 #bookingForm {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px 25px;
+    min-width: 0;
 }
 
 .form-group {
@@ -285,12 +294,47 @@ td a:hover {
     opacity: 0.85;
 }
 
-/* 8. MY BOOKINGS SECTION */
+/* 8. ACTIVITY 7 - BOOKING SUMMARY CARD */
+.booking-summary {
+    margin-top: 0;
+    padding: 20px;
+    background-color: #f4f6fb;
+    border: 2px solid var(--accent);
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.booking-summary h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.booking-summary p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.booking-summary strong {
+    color: var(--primary);
+}
+
+.booking-summary hr {
+    margin: 15px 0;
+    border: 1px solid #ddd;
+}
+
+.booking-summary #summaryTotal {
+    color: #008000;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* 9. MY BOOKINGS SECTION */
 #mybookings {
     overflow-x: auto;
 }
 
-/* 9. GUIDELINES CARDS */
+/* 10. GUIDELINES CARDS */
 #guidelines article {
     display: inline-block;
     vertical-align: top;
@@ -311,7 +355,7 @@ td a:hover {
     color: var(--red);
 }
 
-/* 10. FOOTER */
+/* 11. FOOTER */
 footer {
     background-color: var(--primary);
     color: var(--white);
@@ -320,7 +364,7 @@ footer {
     margin-top: 30px;
 }
 
-/* 11. RESPONSIVE DESIGN */
+/* 12. RESPONSIVE DESIGN */
 @media (max-width: 768px) {
 
     header {
@@ -340,6 +384,10 @@ footer {
 
     .hero h1 {
         font-size: 30px;
+    }
+
+    .booking-layout {
+        grid-template-columns: 1fr;
     }
 
     #bookingForm {
