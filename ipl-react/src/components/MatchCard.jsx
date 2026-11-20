@@ -1,8 +1,17 @@
-
 import { useState } from "react";
 
 function MatchCard(props) {
   const [tickets, setTickets] = useState(0);
+
+  function addTicket() {
+    setTickets((prev) => prev + 1);
+    props.onBooking();
+  }
+
+  function resetTickets() {
+    props.onReset(tickets);
+    setTickets(0);
+  }
 
   return (
     <div className="match-card">
@@ -31,11 +40,11 @@ function MatchCard(props) {
 
       <p>Tickets Selected: {tickets}</p>
 
-      <button onClick={() => setTickets(tickets + 1)}>
+      <button onClick={addTicket}>
         Add Ticket
       </button>
 
-      <button onClick={() => setTickets(0)}>
+      <button onClick={resetTickets}>
         Reset
       </button>
 

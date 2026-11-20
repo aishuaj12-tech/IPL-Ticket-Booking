@@ -1,9 +1,11 @@
-
+import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import MatchCard from "./components/MatchCard";
 
 function App() {
+  const [bookingCount, setBookingCount] = useState(0);
+
   const matches = [
     {
       id: 1,
@@ -49,7 +51,7 @@ function App() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar bookingCount={bookingCount} />
 
       <Hero />
 
@@ -66,6 +68,16 @@ function App() {
             general={match.general}
             premium={match.premium}
             vip={match.vip}
+
+            onBooking={() =>
+              setBookingCount((prev) => prev + 1)
+            }
+
+            onReset={(tickets) =>
+              setBookingCount((prev) =>
+                Math.max(0, prev - tickets)
+              )
+            }
           />
         ))}
       </div>
