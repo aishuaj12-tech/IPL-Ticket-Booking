@@ -1,13 +1,13 @@
-function Navbar({ bookingCount = 0 }) {
+function Navbar({ bookingCount = 0, onNavigate }) {
   return (
     <nav className="navbar">
       <h2>IPL TICKETS</h2>
 
       <ul>
-        <li>Home</li>
-        <li>Matches</li>
-        <li>Book Ticket</li>
-        <li>My Bookings</li>
+        <li onClick={() => onNavigate("home")}>Home</li>
+        <li onClick={() => onNavigate("matches")}>Matches</li>
+        <li onClick={() => onNavigate("matches")}>Book Ticket</li>
+        <li onClick={() => onNavigate("bookings")}>My Bookings</li>
       </ul>
 
       <div className="booking-count">
